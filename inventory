@@ -1,0 +1,12 @@
+[app]
+server-1 ansible_host=172.17.02
+server-2 ansible_host=172.17.03
+[db]
+server-3 ansible_host=172.17.04
+[other]
+server-4 ansible_host=172.17.05 ansible_port=2222
+[multi:children]
+app
+db
+[multi:vars]
+ansible_port=2222
