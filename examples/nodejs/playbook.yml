@@ -1,0 +1,10 @@
+---
+- hosts: other
+  become: yes
+  vars:
+    node_apps_location: /usr/local/opt/node
+  tasks:
+    # - name: Install EPEL repo
+    #   apt: name=epel-release state=present
+    - name: Install Node.js and npm
+      apt: name=npm state=present

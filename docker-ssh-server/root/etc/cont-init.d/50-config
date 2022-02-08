@@ -1,8 +1,16 @@
-#!/usr/bin/with-contenv bash
+#!/bin/bash
 
 # create folders
 mkdir -p \
+	/app \
+	/config \
+	/defaults
+    
+mkdir -p \
     /config/{.ssh,ssh_host_keys,logs/openssh}
+mkdir /var/run/sshd
+
+
 
 USER_NAME=${USER_NAME:-linuxserver.io}
 echo "User name is set to $USER_NAME"
@@ -51,9 +59,9 @@ else
     echo "User/password ssh access is disabled."
 fi
 
-# set umask for sftp
-UMASK=${UMASK:-022}
-sed -i "s|/usr/lib/ssh/sftp-server$|/usr/lib/ssh/sftp-server -u ${UMASK}|g" /etc/ssh/sshd_config
+# # set umask for sftp
+# UMASK=${UMASK:-022}
+# sed -i "s|/usr/lib/ssh/sftp-server$|/usr/lib/ssh/sftp-server -u ${UMASK}|g" /etc/ssh/sshd_config
 
 # set key auth in file
 if [ ! -f /config/.ssh/authorized_keys ];then
@@ -65,17 +73,17 @@ fi
     echo "$PUBLIC_KEY" >> /config/.ssh/authorized_keys && \
     echo "Public key from env variable added"
 
-[[ -n "$PUBLIC_KEY_URL" ]] && \
-    PUBLIC_KEY_DOWNLOADED=$(curl -s $PUBLIC_KEY_URL) && \
-    [[ ! $(grep "$PUBLIC_KEY_DOWNLOADED" /config/.ssh/authorized_keys) ]] && \
-    echo "$PUBLIC_KEY_DOWNLOADED" >> /config/.ssh/authorized_keys && \
-    echo "Public key downloaded from '$PUBLIC_KEY_URL' added"   
+# [[ -n "$PUBLIC_KEY_URL" ]] && \
+#     PUBLIC_KEY_DOWNLOADED=$(curl -s $PUBLIC_KEY_URL) && \
+#     [[ ! $(grep "$PUBLIC_KEY_DOWNLOADED" /config/.ssh/authorized_keys) ]] && \
+#     echo "$PUBLIC_KEY_DOWNLOADED" >> /config/.ssh/authorized_keys && \
+#     echo "Public key downloaded from '$PUBLIC_KEY_URL' added"   
 
-[[ -n "$PUBLIC_KEY_FILE" ]] && [[ -f "$PUBLIC_KEY_FILE" ]] && \
-    PUBLIC_KEY2=$(cat "$PUBLIC_KEY_FILE") && \
-    [[ ! $(grep "$PUBLIC_KEY2" /config/.ssh/authorized_keys) ]] && \
-    echo "$PUBLIC_KEY2" >> /config/.ssh/authorized_keys && \
-    echo "Public key from file added"
+# [[ -n "$PUBLIC_KEY_FILE" ]] && [[ -f "$PUBLIC_KEY_FILE" ]] && \
+#     PUBLIC_KEY2=$(cat "$PUBLIC_KEY_FILE") && \
+#     [[ ! $(grep "$PUBLIC_KEY2" /config/.ssh/authorized_keys) ]] && \
+#     echo "$PUBLIC_KEY2" >> /config/.ssh/authorized_keys && \
+#     echo "Public key from file added"
 
 if [ -d "$PUBLIC_KEY_DIR" ];then
     for F in "${PUBLIC_KEY_DIR}"/*;do
@@ -104,3 +112,7 @@ chmod 700 \
     /config/.ssh
 chmod 600 \
     /config/.ssh/authorized_keys
+
+# chown "$USER_NAME":"$USER_NAME" /app
+# chown "$USER_NAME":"$USER_NAME" /config
+# chown "$USER_NAME":"$USER_NAME" /defaults

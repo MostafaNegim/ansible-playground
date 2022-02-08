@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install chrony
+    apt:
+      name: chrony
+      state: present
+  - name: Chrony is running
+    service:
+      name: chronyd
+      state: started
+      enabled: yes
+
+- hosts: all
+  become: yes
+  tasks:
+    - apt: name=chrony state=present
+    - service: name=chronyd state=started enabled=yes
