@@ -14,7 +14,7 @@ default_pkgs:
   - iptables-persistent
   - iptraf
   - python-apt
-  - python-mysqldb
+  - python3-mysqldb
   - python-pip
   - sudo
   - sysstat
