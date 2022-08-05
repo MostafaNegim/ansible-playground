@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  roles: 
+    - {role: ssh-keys, tags: "ssh_keys"}
