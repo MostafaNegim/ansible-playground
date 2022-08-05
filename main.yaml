@@ -4,3 +4,5 @@
   become_user: root
   roles: 
     - {role: ssh-keys, tags: "ssh_keys"}
+    - {role: general, tags: "general"}
+    
