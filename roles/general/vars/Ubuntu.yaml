@@ -1,0 +1,24 @@
+# List of basic packages
+default_pkgs:
+  - apt-transport-https
+  - bridge-utils
+  - conntrack
+  - curl
+  - dstat
+  - git
+  - htop
+  - jq
+  - ifenslave
+  - iftop
+  - iptables
+  - iptables-persistent
+  - iptraf
+  - python-apt
+  - python-mysqldb
+  - python-pip
+  - sudo
+  - sysstat
+  - telnet
+  - vim
+  - tmux
+  - sysfsutils
