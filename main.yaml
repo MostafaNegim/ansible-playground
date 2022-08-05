@@ -5,4 +5,5 @@
   roles: 
     - {role: ssh-keys, tags: "ssh_keys"}
     - {role: general, tags: "general"}
+    - {role: secure-ssh, tags: "secure_ssh"}
     
