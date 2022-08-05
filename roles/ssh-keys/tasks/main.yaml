@@ -1,0 +1,9 @@
+---
+- include_vars: "ssh-key-files.yaml"
+
+- name: Add ssh-key to user
+  authorized_key:
+      user: root
+      state: "{{ item.state }}"
+      key: "{{ lookup('file',item.key) }}"
+  with_items: "{{ users_keys }}"
