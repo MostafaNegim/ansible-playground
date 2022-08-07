@@ -1,0 +1,3 @@
+users_keys:
+  - key: 'files/mostafa.pub'
+    state: absent

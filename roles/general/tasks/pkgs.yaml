@@ -1,0 +1,13 @@
+---
+- name: Update repo cache
+  apt: 
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian" and default_pkgs is defined
+
+- name: Install default packages
+  package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{default_pkgs }}"
+  when: default_pkgs is defined

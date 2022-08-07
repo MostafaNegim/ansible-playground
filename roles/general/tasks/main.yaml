@@ -1,0 +1,14 @@
+---
+- name: Gather os specific variable
+  include_vars: "{{item}}"
+  with_first_found:
+    # - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yaml"
+    # - "{{ ansible_os_family }}.yml"
+  register: item
+
+- include_tasks: pkgs.yaml
+  when: default_pkgs is defined
+
+- include_tasks: timezone.yaml
+  when: timezone is defined
