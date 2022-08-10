@@ -7,4 +7,5 @@
     - {role: general, tags: "general"}
     - {role: secure-ssh, tags: "secure_ssh"}
     - {role: docker, tags: "docker"}
+    - {role: go, tags: "go"}
     
