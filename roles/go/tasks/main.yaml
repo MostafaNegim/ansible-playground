@@ -12,9 +12,13 @@
     src: /tmp/{{go_name}}
     dest: /usr/local
     remote_src: yes
-- name: "Validate if a String or line is present in the file"
+- name: "Add go path to the .profile"
   lineinfile:
     path: "{{user_home}}/.profile"
     line: "export PATH=$PATH:/usr/local/go/bin"
     state: present
     backup: yes
+- name: Remove archive file
+  file: 
+    path: /tmp/{{go_name}}
+    state: absent
