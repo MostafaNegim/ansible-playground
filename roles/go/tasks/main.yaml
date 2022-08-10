@@ -1,9 +1,4 @@
 ---
-# - name: shell
-#   shell: pwd; who
-#   register: result
-# - debug:
-#     msg: "{{ansible_env.HOME}}"
 - name: Remove any previous Go installation
   file:
     path: /usr/local/go
@@ -18,9 +13,6 @@
     dest: /usr/local
     remote_src: yes
 - name: "Validate if a String or line is present in the file"
-  # become: yes
-  # become_user: root
-  # tags: example1
   lineinfile:
     path: "{{user_home}}/.profile"
     line: "export PATH=$PATH:/usr/local/go/bin"
