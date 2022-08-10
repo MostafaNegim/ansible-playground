@@ -1,0 +1,7 @@
+go_url: https://go.dev/dl/{{go_name}}
+go_version: 1.19
+architecture: linux-amd64
+go_name: go{{go_version}}.{{architecture}}.tar.gz
+
+# 
+user_home: /home/USER_NAME
